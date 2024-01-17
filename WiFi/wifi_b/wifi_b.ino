@@ -94,8 +94,7 @@ void loop() {
     client.connect("ESP8266Client");
   } 
 
-  bool ret = client.publish("4ID3_GroupA/temperature", String(dhtTempEvent.temperature).c_str());
-  print(ret)
+  client.publish("4ID3_GroupA/temperature", String(dhtTempEvent.temperature).c_str());
   delay(200);
   client.publish("4ID3_GroupA/humidity", String(dhtHumEvent.relative_humidity).c_str());
   delay(200);
