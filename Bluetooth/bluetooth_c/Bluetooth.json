@@ -1,0 +1,117 @@
+[
+    {
+        "id": "a6d306b0b1d98ade",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "736945ca01065473",
+        "type": "inject",
+        "z": "a6d306b0b1d98ade",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "GroupA/DeviceA/LED",
+        "payload": "LED_ON",
+        "payloadType": "str",
+        "x": 230,
+        "y": 180,
+        "wires": [
+            [
+                "7931f964898bd80d"
+            ]
+        ]
+    },
+    {
+        "id": "7931f964898bd80d",
+        "type": "mqtt out",
+        "z": "a6d306b0b1d98ade",
+        "name": "",
+        "topic": "GroupA/DeviceA/LED",
+        "qos": "0",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1c150a15d610024c",
+        "x": 700,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "6ab6cc75add113ea",
+        "type": "inject",
+        "z": "a6d306b0b1d98ade",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "GroupA/DeviceA/LED",
+        "payload": "LED_OFF",
+        "payloadType": "str",
+        "x": 230,
+        "y": 240,
+        "wires": [
+            [
+                "7931f964898bd80d"
+            ]
+        ]
+    },
+    {
+        "id": "1c150a15d610024c",
+        "type": "mqtt-broker",
+        "name": "MQTT Wifi Lab",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
