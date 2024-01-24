@@ -4,7 +4,6 @@ import json
 import paho.mqtt.client as mqtt
 import time
 
-
 #   Configuring MQTT server and COM
 mqtt_ip = None
 mqtt_port = None
@@ -21,6 +20,7 @@ if(bluetooth_com_port == None or bluetooth_com_port  == ''): bluetooth_com_port 
 
 print(f'\n-------\nCONFIGURATION\n-------\nIP: {mqtt_ip}\nPORT: {mqtt_port}\nBT COM: {bluetooth_com_port}')
 
+
 #   MQTT callback functions
 def on_connect(client, userdata, flags, rc):
     print(f"Connected, status = {str(rc)}")
@@ -28,22 +28,17 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     print(msg.topic+" "+str(msg.payload))
 
+
 client = mqtt.Client()
 client.on_connect = on_connect
 client.on_message = on_message
-
-#   Connecting client to MQTT broker
-print("Connecting to MQTT") 
-while client.is_connected is False:
-    print(".")
-    time.sleep(0.7)
-    client.connect(mqtt_ip, mqtt_port, 60)
 
 #   Connecting to serial
 print("Connecting to serial: " + bluetooth_com_port)
 time.sleep(1)
 ser = serial.Serial(bluetooth_com_port, 9600)
 print("Bluetooth COM opened")
+
 
 while True:
     #   Refreshing the client connection
@@ -65,10 +60,10 @@ while True:
             success = client.publish(f'{group_name}/{device_id}/{key}', val.encode("UTF-8"))
             print(f'MQTT Publish {group_name}/{device_id}/{key} -> {val}\n    : send status = {success.is_published()}')
             
-
             
     except Exception as e:
         print("Failed to decode: ", e)
         print(serial_json_string)
 
 ser.close()
+

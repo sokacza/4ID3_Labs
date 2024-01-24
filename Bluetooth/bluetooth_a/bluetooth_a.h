@@ -2,6 +2,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <AsyncAPDS9306.h>
+
 //IIC Addresses for Temperature Sensor
 #define ADDR (byte)(0x40)
 #define TMP_CMD (byte)(0xF3)
@@ -15,5 +16,5 @@ String device_name = "DeviceA";
 
 //Instantiating sensor object and configuration
 AsyncAPDS9306 light_sensor;
-const APDS9306_ALS_GAIN_t gain = APDS9306_ALS_GAIN_1;
-const APDS9306_ALS_MEAS_RES_t time = APDS9306_ALS_MEAS_RES_16BIT_25MS;
+const APDS9306_ALS_GAIN_t apds_gain = APDS9306_ALS_GAIN_1;
+const APDS9306_ALS_MEAS_RES_t apds_time = APDS9306_ALS_MEAS_RES_16BIT_25MS;
