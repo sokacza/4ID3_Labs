@@ -1,0 +1,117 @@
+[
+    {
+        "id": "a6d306b0b1d98ade",
+        "type": "tab",
+        "label": "Flow 3",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "3904d07cee4f3db0",
+        "type": "mqtt in",
+        "z": "a6d306b0b1d98ade",
+        "name": "",
+        "topic": "GroupA/FieldDevice/Luminosity",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "1c150a15d610024c",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 310,
+        "y": 140,
+        "wires": [
+            [
+                "29650f79c52a0adc"
+            ]
+        ]
+    },
+    {
+        "id": "61e21bc129974286",
+        "type": "mqtt out",
+        "z": "a6d306b0b1d98ade",
+        "name": "",
+        "topic": "GroupA/FieldDevice/LED2",
+        "qos": "2",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "1c150a15d610024c",
+        "x": 920,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "29650f79c52a0adc",
+        "type": "function",
+        "z": "a6d306b0b1d98ade",
+        "name": "function 1",
+        "func": "if(msg.payload > 200){\n    msg.payload = 1\n}\nelse{\n    msg.payload = 0\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 140,
+        "wires": [
+            [
+                "61e21bc129974286",
+                "08c80a43d90db178"
+            ]
+        ]
+    },
+    {
+        "id": "08c80a43d90db178",
+        "type": "debug",
+        "z": "a6d306b0b1d98ade",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "1c150a15d610024c",
+        "type": "mqtt-broker",
+        "name": "MQTT Wifi Lab",
+        "broker": "test.mosquitto.org",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    }
+]
