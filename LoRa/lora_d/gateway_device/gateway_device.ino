@@ -33,7 +33,7 @@ void callback(char* topic, byte* payload, unsigned int length) {
   }
   Serial.println("Data received:\n   Topic: " + topic_str + "\n   Data: " + data_str + "\n");
 
-  if (topic_str == (String(group_name) + "/FieldDevice/LED2")){
+  if (topic_str == (String(group_name) + "/" + field_device_name + "/LED2")){
       Serial.println("Forwarding: " + data_str);
       if(data_str == "0"){
         Serial2.println('2');
@@ -50,12 +50,12 @@ void loop()
   if (!client.connected())
   {
       Serial.println("Reconnecing to MQTT broker");
-      client.connect(String(String(group_name) + "_" + String(device_name)).c_str());
+      client.connect(String(String(group_name) + "_" + String(gateway_device_name)).c_str());
         client.setCallback(callback);
         
       if(client.state() == MQTT_CONNECTED){
         Serial.println("Connected to MQTT borker");
-        client.subscribe(String(String(group_name) + "/FieldDevice/LED2").c_str());
+        client.subscribe(String(String(group_name) + "/" + field_device_name + "/LED2").c_str());
         Serial.print("IP: ");
         Serial.println(WiFi.localIP());
         Serial.println("Wifi Signal Strength: " + String(WiFi.RSSI()) + " dB");
@@ -72,10 +72,10 @@ void loop()
     String incoming_data = Serial2.readString();
     StaticJsonDocument<sizeof(incoming_data) + 200> json_document;
     DeserializationError error = deserializeJson(json_document, incoming_data.c_str());
-    const char* field_device_temp = json_document[String(group_name)]["FieldDevice"]["Temp"];
-    const char* field_device_lum = json_document[String(group_name)]["FieldDevice"]["Luminosity"];
-    client.publish(String(String(group_name) + "/FieldDevice/Temp").c_str(), field_device_temp);
-    client.publish(String(String(group_name) + "/FieldDevice/Luminosity").c_str(), field_device_lum);
+    const char* field_device_temp = json_document[group_name][field_device_name]["Temp"];
+    const char* field_device_lum = json_document[group_name][field_device_name]["Luminosity"];
+    client.publish(String(String(group_name) + "/" + String(field_device_name) + "/Temp").c_str(), field_device_temp);
+    client.publish(String(String(group_name) + "/" + String(field_device_name) + "/Luminosity").c_str(), field_device_lum);
 
 
     

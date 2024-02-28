@@ -20,7 +20,8 @@
 EBYTE Transceiver(&Serial2, PIN_M0, PIN_M1, PIN_AX);
 
 const char* group_name = "GroupA";
-const char* device_name = "GatewayDevice";
+const char* gateway_device_name = "GatewayDevice";
+const char* field_device_name = "FieldDevice";
 
 //WiFi login credentials
 const char* ssid = "Messi10";

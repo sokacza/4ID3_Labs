@@ -42,7 +42,7 @@ void loop()
   if (!client.connected())
   {
       Serial.println("Reconnecing to MQTT broker");
-      client.connect(String(String(group_name) + "_" + String(device_name)).c_str());
+      client.connect(String(String(group_name) + "_" + String(gateway_device_name)).c_str());
         client.setCallback(callback);
       if(client.state() == MQTT_CONNECTED){
         Serial.println("Connected to MQTT broker");
@@ -62,9 +62,9 @@ void loop()
     String incoming_data = Serial2.readString();
     StaticJsonDocument<sizeof(incoming_data) + 200> json_document;
     DeserializationError error = deserializeJson(json_document, incoming_data.c_str());
-    const char* field_device_temp = json_document["GroupA"]["FieldDevice"]["Temp"];
-    const char* field_device_lum = json_document["GroupA"]["FieldDevice"]["Luminosity"];
-    client.publish(String("GroupA/FieldDevice/Temp").c_str(), field_device_temp);
-    client.publish(String("GroupA/FieldDevice/Luminosity").c_str(), field_device_lum);
+    const char* field_device_temp = json_document[group_name][field_device_name]["Temp"];
+    const char* field_device_lum = json_document[group_name][field_device_name]["Luminosity"];
+    client.publish(String(String(group_name) + "/" + String(field_device_name) + "/Temp").c_str(), field_device_temp);
+    client.publish(String(String(group_name) + "/" + String(field_device_name) + "/Luminosity").c_str(), field_device_lum);
  }
 }
